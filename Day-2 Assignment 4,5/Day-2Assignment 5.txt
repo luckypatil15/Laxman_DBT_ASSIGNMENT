@@ -1,0 +1,81 @@
+-------------+
+ASSIGNMENT-5 |
+-------------+
+================================================================================
+Question 1.Write a query that will give you all orders for more than Rs. 1,000.
+---------------------
+Answer:
+select * from orders where amt > 1000;
+================================================================================
+Question 2. Write a query that will give you the names and cities of all salespeople in
+London with a commission above .10.
+----------------------
+Answer:
+select sname,city from salespeople where city = "London" and comm > 0.10;
+===============================================================================
+Question 3. Write a query on the Customers table whose output will exclude all customers
+with a rating <= 100, unless they are located in Rome.
+---------------------
+Answer:
+select * from  customers where not rating <=100 or city="Rome";
+===============================================================================
+Question 4. What will be the output from the following query?
+
+ Select * from Orders
+ where (amt < 1000 OR
+ NOT (odate = '1990-10-03'
+ AND cnum > 2003));
+------------------------
+Answer:
++------+---------+------------+------+------+
+| onum | Amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+Explaination :
+1.rows having amt< 1000 selected(18.69,767.19,75.75)
+2.rows not having any of the condition below is selected :
+	A)either odate = 03-10-1990
+	B)or cnum > 2003
+===============================================================================
+Question 5.What will be the output of the following query?
+Select * from Orders
+ where NOT ((odate = '1990-10-03' OR snum
+ >1006) AND amt >= 1500);
+------------------------
+Answer:
++------+---------+------------+------+------+
+| onum | Amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+Explaination:
+1.inner bracket
+	(odate = 3-10-1990 or snum>1006)
+	when one of the above returns true the whole bracket return true;
+2.And statement amt>=1500 is true;
+3.so data is shown wherever any of the above condition is returning false;
+================================================================================
+Question 6. What is a simpler way to write this query?
+ Select snum, sname, city, comm From Salespeople
+where (comm > .12 OR comm <.14); 
+-------------------------
+Answer:
+select snum,sname,city,comm from salespeople where comm between 0.12 and 0.14;
+=================================================================================
