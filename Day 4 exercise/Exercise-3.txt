@@ -1,0 +1,20 @@
+q1.
+select concat(upper(substr(sname,1,1)),substr(sname,2))from supplier;
+q2.
+select upper(sname) from supplier;
+q3.
+select lower(sname)  from supplier;
+q4.
+select lpad(sname,20,' ') from supplier;
+q5
+select replace(sname,'la','ro') from supplier;
+q6
+select replace(replace(sname,'l','r'),'a','o') from supplier;
+q7.
+select sname, length(sname) from supplier.
+q8.
+select * from supplier where soundex(sname) = soundex('break');
+q9.
+
+q10.
+select now();
