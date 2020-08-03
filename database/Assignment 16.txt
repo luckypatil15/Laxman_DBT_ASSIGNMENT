@@ -1,0 +1,10 @@
+1.create index ind_odate on orders (odate);
+select onum from orders ;
+2.
+create unique index ind_onum on orders(onum);
+To cross check
+select * from orders;
+insert into orders values(3001,15.26,'1990-10-03',2008,1007);
+3.
+create index ind_odate on orders;
+select sname,onum,odate from orders,salespeople where ;
