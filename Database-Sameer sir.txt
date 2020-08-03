@@ -1,0 +1,285 @@
+----------+
+DBT DAY-3 |
+==========+
++=+=+=+=+==+==+=+==+=+==
+to start mysql in command line
+mysql -u username -p
+===============================
+Create database
+===============================
+commands:
+
+create database database_name;
+create schema database_name;
+-------------------------------
+using database
+-------------------------------
+commands:
+l
+
+
+use database_name;
+-------------------------------
+Logical operators
+------------------
+1. <=> --NULL safe equal to operator
+this is also equality operator 
+2. <> not equality operator                 
+------------------
+Arithmetic operators:-
+with precedence
+1.() 
+2.**/POWER(exponentiation(** used only in oracle)POWER function is used inn mysql)
+3./
+4.+
+5.-
+
+e.g 
+sal**1/3 --- wrong
+sal**(1/3)---right
+============================================================================
+Alias/psudo column/fake column
+--------------------------
+Temporary name given to particular field to make it readable and for display purpose
+
+e.g.
+select ename "EMPNAME",
+sal "salary",
+sal * 12 "Annual Salary",
+sal *12 * 0.4 "Annual HRA";
+
+alias               
+can not be used with operators,where clause,expressions;
+===========================================================================
+Distinct
+=========
+command : select distinct job from emp;
+------
+whenever distinct used sorting is used internally and then distinct field are brought up
+distinct command is used to find the unique fields
+
+UNIQUE
+------
+command : select unique job from emp;
+
+Similar working with distinct.
+distinct is common for all RDBMS
+unique works only in oracle RDBMS
+avoid using UNIQUE , use distinct so that statements can be used in mysql & other RDBMS
+distinct has to be at start from columns
+
+tricky Example:
+command:select distinct job , ename from emp;
+distinct command keyword works on the all columns in the select statement.
+===========================================================================
+Storage
+---------
+Mysql stores the data in the form of rows and access it whenever required by the row address
+so whenever we are retrieving data my sql fetches the sequential row address and does the required computation 
+on that particular row address.
+
+That's why whenever we update the row and row length is increasing it will be updated to new address,
+new storage space and address.
+
+1. whenever we insert new rows into data base db finds the equivalent free space available 
+and puts the row there.
+2.it will always be in ascending order.
+3.this is reason rows of the table are not stored sequentially
+4.in Rdbms table is not a file.
+===========================================================================
+ORDER BY clause
+---------------
+command:
+select deptno,job,ename,sal,hiredate from emp order by hiredate;
+
+1.order by clause is used to sort and use sorted data based on the
+int,char,date values.
+2.there is no upper limit on the number of columnsyou can add in the order by clause.
+3."order by fieldname desc" desc at end of the statement order by descending order.
+IMP:4.order by clause does manipulation in ram so alias can be worked withorder by clause but not with where clause because where clause does processing in Hard disk.
+5.order by also works with column number
+e.g
+command:select * from emp where deptno = 10 order by 2;
+(here data will be sorted in the second column)   
+6.order by clause is last clause in the select statement.
+7.where clause is specified before the order by clause.
+
+command: 
+select deptno,job,ename,sal,hiredate from emp order by hiredate, country,state,district,city;
+select deptno,job,ename,sal,hiredate from emp order by hiredate desc;
+
+3.sorting on base of multiple columns makes your select statement slower.
+e.g
+select ename from emp order by sal;
+(there is no compulsion that field in order by must be included in the select statement).
+=================================================================================
+---------+
+Day 4 DBT|
+---------+----------+
+post login commands |
+====================+
+Execute:
+ctrl+enter
+
+1.To connect particular database:
+use <databasename>;
+
+2.To see list of users:
+select * from user;
+
+user -> system table (63 system tables in mysql)
+set of system tables->known as data dictionary
+ * store all the usernames, permissions and etc.
+
+3.To see which tables are created :-
+show tables:
+
+4.To see structure of table
+desc <tablename>;
+
+5.To create a user:
+create user akshay identified by password;
+
+6.To give the particular ip address or any particular computer
+create user akshay@'%' identified by password;
+(above command will give user akshay to connect database from any computer) 
+
+7.To create database
+create schema akshay;
+
+8.To Grant permissions
+	a.click on the server (menu at the top)
+	b.click on Users and privileges
+	c.select the username that you created from the user account list at LHS.
+	d. click on administrative roles on the tab menu.
+	e. select the DBA role(database administrator).
+	f. click on the apply button.
+	to check the previleges
+	g. click on schema privileges.
+	h. click on add entry push-button.
+	i. click on selected schema radio button
+	j. Select Akshay schema (schema you want to grant permissions)
+	k.click on ok (button).
+	l. click on selct all or chose and apply
+	m.exit from mysql workbench
+	n. open mysql workbench
+	o create connnection for new akshay user.
+==================================================================
+emp table
+
+empno	ename	sal	city	deptno
+1	Adams	1000	B	10
+2	Blake	2000	D	10
+3	Allen	2500	B	20
+4	King	3000	D	30
+5 	Ford	4000	B	40
+
+queries 
+1. want enames with letter A at start;
+way 1:
+select * form emp where ename >= 'A' and ename <'B';
+	1.this is string comparison method
+way 2:
+select * from emp where ename like '%A';
+
++---------+--------------------------------------------------------------------------------------------------------------
+|DBT DAY 5|
++---------+
+to disable autocommit in workbench ;
+query->Autocommit transaction uncheck it 
+
+
+character functions
+1. concat ()
+syntax :select concat (cname,' ',city) from customers;
+	select concat (concat(cname,' '),city) from customers;
+	
+2. upper ()
+syntax : select upper(lower(city)) from customers;
+	 select upper(city) from customer;
+3.initcap():
+synatx : select concat(upper(substr(cname,1,1)),substr(cname,2))from customers;
+initcap for concat letters
+select concat(concat(upper(substr(cname,1,1)),substr(cname,2)),' ',concat(upper(substr(city,1,1)),substr(city,2)))from customers; -- Laxman Patil
+4.Lpad()
+syantax :select lpad(cname,10,'*')from customers;
+5.rpad()
+syntax :select rpad(cname,10,'*')from customers;
+
+
+
+
+
+
+having clause;
+where clause works in hard disk to restrict the rows to bring in the ram.
+but having clause works after the calculation in ram processing in ram 
+
+generally having clause should be used on the group functions;
+
+syntax :  select deptno, sum(sal) from emp group by having sum(sal) < 18000;
+
+
+order by clause with group by:
+order by should be done at last after having
+
+
+ORDER in which clause works
+1. selct 
+2.group by
+3.having
+4.order by
+
+order by clause is last clause in the select.
+
+nesting of group functions is supported inn oracle not in other RDBMS.
+for example: select max(sum(sal)) from emp groupp by deptno;
+above works oracle but not in my sql
+
+to make it work in my sql or other RDBMS
+select max(sum_sal) from(select sum(sal) sum_sal from emp group by dept no) as tempp;
+	1. in above statement when we gave alias to select statment my sql creates a temporary table .
+	2. here tempp becomes a table and from statement gives permission to execute 1st slect statement in this table.
+	3.it works but select inside select slows down the system .
+
+
+JOINS
+----------------------------
+dept 
+table
+deptno	dname	loc
+1	TRN	BBY
+2	exp	dlh
+3 	mktg	cal
+
+2nd table employee
+emp
+empno	ename	sal	deptno	job	MGR
+1	Arun	8000	1	M	4
+2	Ali	7000	1	C	1
+3	kiran	3000	1	C	1
+4	Jack	9000	2	M	
+5	Thamos	8000	2	C	4
+
+1.if we want to take values on base of multiple tables and want data from them
+joins are used.
+2.DATA REDUNDANCY:
+	1.if we dont use seperate table for dept we store the values in main table then we will be 
+	repeating the data unnecessarily and hence we are wasting the space on hard disk and this concept is refferred as
+	data redundancy.
+3.to join two seprate tables we have to have common column in both the tables.
+
+join synntax : select dname , ename from emp, deptwhere dept.deptno = emp.deptno;
+		 here , dept.deptno -> tablename.columnname
+
+working:
+	terminnology
+		dept->driver table
+		emp ->driven table
+	A.driving and driven table determined with from clause
+	B.order of the tables in from statement matters as first look in is done in the last table you provided.
+	so in order to make it work fast "from statement" should be used so that table with lesser number of rows 
+	should be taken at last.
+
+	1.it is similar working as the nested while loops for both the table column llike group by.
+	2.for while loop nesting 1st value from driver table row is searched into driven table and gives selected column(columns mentioned in select statement)

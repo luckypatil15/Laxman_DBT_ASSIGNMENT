@@ -1,0 +1,97 @@
+Download mongo db setup
+1.run mongo setup
+2.click next to continue
+3.accept license agreement
+4.click on next.
+5.go for complete setup type.
+6.click on install.
+7.click on yes
+8.mongo go to c:\ folder path
+9.goto c:\program file\MongoDB\serer\bin
+10. open mongod.exe is to start database
+11 open mogo.exe for command line
+12.open directory any where and create folder named data
+
+
+1..goto cmd line
+2.go to the path where mongod .exe is stored
+3.that is in bin folder
+4.and on cmd line
+
+type
+command 
+	mongod --dpath c:\desktop\mongodb\data
+	here after dpath post the path of the directory created
+
+result:
+	waiting for connections on port 2207
+
+4.a now you are connected mongod
+4.b to open the mongo
+
+5..go to same mongo bin folder through seperate cmd line keep orginal one on
+6.run the command : mongo their and will open the mongodb
+
+
+
+7. to see databases
+	a. show databases
+8. to create/use database
+	syntax:	a.use cdac
+	1.if it exist will open 
+	2.if does not exist will create one
+
+9.to see the current database
+	a.bd
+10.to see database in the list theough show databases
+it must have a collection
+
+11. to see collection
+	show collection
+12.to drop the databse
+	1.db.dropdatabase()
+	it will delete the currently selected database if you have not selected any it will delete the test database by default
+13. to create collection
+	>db.createCollection("library")
+14.to see collecton
+	>show collection
+15.to drop the collection
+	>db.library.drop
+
+16.To insert a documnet in the library/any collection
+	>db.COLLECTION_NAME.insert(document)
+	>db.library.insert({title : 'Mongodb Programming', author : 'sammer', likes :100})
+
+17. to view the data we have to use the find method
+	>db.COLLECTION_NAME.find()
+	>db.library.find()
+
+OBSERVE the '_id' it is similar to the primary key
+
+insert another document
+	>db.library.insert({title:'Mysql programming' authors:['Jack','Jill'], likes:200})
+	to view above document use find method
+
+to make find method more prsentable
+	>db.library.find().pretty()
+to get fisrt document
+	>db.library.findOne()
+to update a document
+	>db.COLLECTION_NAME.update(SELECTION_CRITERIA, UPDATED_DATA)
+	>db.library.update({author:'sameer'},{$set:{author:'sameer'})
+to delete document
+	>db.COLLECTION_NAME.remove(DELETION_CRITERIA)
+   LETS DELETE 	THE DOCUMENT AT 100LIKES
+	>db.library.remove({likes:100})
+
+To stop MongoDB
+	1.first exit from the mongodb shell
+	2.press ctrl+c in the terminal where the server was running
+
+
+
+	
+
+
+ 
+
